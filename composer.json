@@ -1,0 +1,15 @@
+{
+    "name": "lena/lena",
+    "autoload": {
+        "psr-4": {
+            "Lena\\Lena\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "LeonardoGNascimento",
+            "email": "leonardogabrielllpedroso@gmail.com"
+        }
+    ],
+    "require": {}
+}
