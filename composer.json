@@ -1,17 +1,21 @@
 {
     "name": "lena/lena",
-    "autoload": {
-        "psr-4": {
-            "Lena\\Lena\\": "App/"
-        }
-    },
+    "type": "library",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "LeonardoGNascimento",
             "email": "leonardogabrielllpedroso@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Lena\\Lena\\": "App/"
+        }
+    },
     "minimum-stability": "beta",
     "version": "1.0.0",
-    "require": {}
+    "require": {
+        "php": ">=8.2"
+    }
 }
