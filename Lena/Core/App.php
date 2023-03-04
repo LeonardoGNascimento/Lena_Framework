@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace Lena\Core;
 
 class App
 {
@@ -36,6 +36,12 @@ class App
             "controller" => $controller,
             "method" => $method
         ];
+    }
+
+    public function GROUP($prefix, $rotas)
+    {
+        // var_dump($this->GET);
+        var_dump($rotas);
     }
 
     public function run()

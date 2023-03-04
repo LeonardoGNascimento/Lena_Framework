@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Usuario\Controller;
+namespace Lena\Usuario\Controller;
 
-use App\Core\Controller;
-use App\Core\Request;
-use App\Usuario\Dominio\Command\CriaUsuarioCommand;
-use App\Usuario\Dominio\Entity\Usuario;
+use Lena\Core\Controller;
+use Lena\Core\Request;
+use Lena\Usuario\Dominio\Command\CriaUsuarioCommand;
+use Lena\Usuario\Dominio\Entity\Usuario;
 
 class UsuarioController extends Controller
 {
     public function lista(Request $request)
     {
         $resultado = Usuario::all([
-            "nome = leo",
-            "idade = 20"
+            "idade in (20, 40)"
         ]);
 
-        $teste = Usuario::startSelect('coluna1', 'coluna2');
-
-        var_dump($teste->get());
         return $this->return_json($resultado);
     }
 

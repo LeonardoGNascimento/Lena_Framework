@@ -1,12 +1,11 @@
 <?php
 
-include_once './App/Core/AutoLoad.php';
+require_once './vendor/autoload.php';
 
-use App\Core\App;
-use App\Core\Config;
-use App\Usuario\Controller\UsuarioController;
+use Lena\Core\App;
+use Lena\Core\Config;
+use Lena\Usuario\Controller\UsuarioController;
 
-Autoloader::register();
 Config::config();
 
 $app = new App();
@@ -14,4 +13,5 @@ $app = new App();
 $app->get('usuario/', UsuarioController::class, 'lista');
 $app->post('usuario/', UsuarioController::class, 'cadastra');
 $app->patch('usuario/', UsuarioController::class, 'atualiza');
+
 $app->run();

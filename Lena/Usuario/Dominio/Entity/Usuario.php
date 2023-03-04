@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Usuario\Dominio\Entity;
+namespace Lena\Usuario\Dominio\Entity;
 
-use App\Core\Entity\Entity;
+use Lena\Core\Entity\Entity;
 
 class Usuario extends Entity
 {

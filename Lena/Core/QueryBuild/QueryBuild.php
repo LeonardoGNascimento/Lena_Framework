@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\QueryBuild;
+namespace Lena\Core\QueryBuild;
 
 class QueryBuild
 {

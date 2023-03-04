@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Entity;
+namespace Lena\Core\Entity;
 
-use App\Core\QueryBuild\QueryBuild;
+use Lena\Core\QueryBuild\QueryBuild;
 use PDO;
 
 class Entity extends QueryBuild
@@ -35,9 +35,6 @@ class Entity extends QueryBuild
         }));
 
         $query = "INSERT INTO {$tabela} ({$propsColunas}) VALUES ({$propsValues})";
-
-        var_dump($this);
-        var_dump($query);
         $teste = $pdo->prepare($query);
 
         foreach ($this as $keys => $values) {
@@ -105,7 +102,8 @@ class Entity extends QueryBuild
         $tabela = end($retorno);
 
         $where = implode(' AND ', $where);
-        $query = "SELECT * FROM {$tabela}";
+        $where = !empty($where) ? " WHERE {$where}" : "";
+        $query = "SELECT * FROM {$tabela} {$where}";
         $conexao = $pdo->prepare($query);
         $conexao->execute();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Usuario\Dominio\Command;
+namespace Lena\Usuario\Dominio\Command;
 
-use App\Core\Command\Command;
+use Lena\Core\Command\Command;
 
 class CriaUsuarioCommand extends Command
 {
