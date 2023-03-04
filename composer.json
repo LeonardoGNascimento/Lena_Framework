@@ -11,5 +11,6 @@
             "email": "leonardogabrielllpedroso@gmail.com"
         }
     ],
+    "minimum-stability": "beta",
     "require": {}
 }
