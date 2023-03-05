@@ -1,8 +1,8 @@
 <?php
 
-namespace Lena\Core\Entity;
+namespace Lena\Lena\Core\Entity;
 
-use Lena\Core\QueryBuild\QueryBuild;
+use Lena\Lena\Core\QueryBuild\QueryBuild;
 use PDO;
 
 class Entity extends QueryBuild
@@ -101,21 +101,31 @@ class Entity extends QueryBuild
         $retorno = explode('\\', get_called_class());
         $tabela = end($retorno);
 
-        $where = implode(' AND ', $where);
-        $where = !empty($where) ? " WHERE {$where}" : "";
-        $query = "SELECT * FROM {$tabela} {$where}";
-        $conexao = $pdo->prepare($query);
-        $conexao->execute();
+        $queryBuild = QueryBuild::createSelect($pdo);
+        $queryBuild->select('*')
+            ->from($tabela);
 
-        return $conexao->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($where as $key => $value) {
+            $queryBuild->whereAnd($key, $value[0], $value[1]);
+            // $props[] = $key;
+            // $propsValue[] = ":{$key}";
+        }
+
+        // $where = implode(' AND ', $where);
+        // $where = !empty($where) ? " WHERE {$where}" : "";
+        // $query = "SELECT * FROM {$tabela} {$where}";
+        $resultado = $queryBuild->get();
+
+        return $resultado;
     }
 
     public static function startSelect(...$select)
     {
+        $pdo = new PDO("mysql:host=localhost;dbname=usuario", "root", "");
         $retorno = explode('\\', get_called_class());
         $tabela = end($retorno);
 
-        $queryBuild = self::createSelect();
+        $queryBuild = self::createSelect($pdo);
 
         $queryBuild->select(...$select)
             ->from($tabela);

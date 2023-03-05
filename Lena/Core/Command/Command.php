@@ -1,6 +1,6 @@
 <?php
 
-namespace Lena\Core\Command;
+namespace Lena\Lena\Core\Command;
 
 abstract class Command
 {

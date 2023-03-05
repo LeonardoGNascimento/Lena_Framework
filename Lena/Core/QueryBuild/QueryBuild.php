@@ -1,11 +1,13 @@
 <?php
 
-namespace Lena\Core\QueryBuild;
+namespace Lena\Lena\Core\QueryBuild;
+
+use PDO;
 
 class QueryBuild
 {
-    public static function createSelect()
+    public static function createSelect(PDO $pdo)
     {
-        return Select::create();
+        return Select::create($pdo);
     }
 }

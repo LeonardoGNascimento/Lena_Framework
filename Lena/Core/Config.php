@@ -1,6 +1,6 @@
 <?php
 
-namespace Lena\Core;
+namespace Lena\Lena\Core;
 
 class Config
 {

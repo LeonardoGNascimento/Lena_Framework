@@ -1,17 +1,26 @@
 <?php
 
-namespace Lena\Core\QueryBuild;
+namespace Lena\Lena\Core\QueryBuild;
+
+use PDO;
 
 class Select
 {
     public $selectBase = [];
     public $fromBase = '';
     public $whereBase = [];
+    public $whereDados = [];
+    public $bindParamBase = [];
     public $andBase = [];
 
-    public static function create()
+    public function __construct(
+        public PDO $pdo
+    ) {
+    }
+
+    public static function create(PDO $pdo)
     {
-        return new Select();
+        return new Select($pdo);
     }
 
     public function select(...$select)
@@ -28,7 +37,11 @@ class Select
 
     public function whereAnd($campo, $operador, $dado)
     {
-        $this->whereBase[] = "{$campo} {$operador} {$dado}";
+        $this->whereBase[] = [
+            "query" => "{$campo} {$operador} :{$campo}",
+            "campo" => ":{$campo}",
+            "dados" => $dado
+        ];
         return $this;
     }
 
@@ -36,7 +49,21 @@ class Select
     {
         $select = implode(', ', $this->selectBase);
 
-        return "SELECT {$select} FROM {$this->fromBase}";
+        $whereString = implode(
+            ' AND ',
+            array_map(fn ($item) => $item['query'], $this->whereBase)
+        );
+
+        $whereString = !empty($whereString) ?  " WHERE {$whereString}"  : '';
+
+        $stmt = $this->pdo->prepare("SELECT {$select} FROM {$this->fromBase} {$whereString}");
+
+        foreach ($this->whereBase as $item) {
+            $stmt->bindValue($item['campo'], $item['dados']);
+        }
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getOne()
