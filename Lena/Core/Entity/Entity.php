@@ -95,7 +95,7 @@ class Entity extends QueryBuild
         return $pdo->lastInsertId();
     }
 
-    public static function all($where = [])
+    public static function all($options = [])
     {
         $pdo = new PDO("mysql:host=localhost;dbname=usuario", "root", "");
         $retorno = explode('\\', get_called_class());
@@ -105,15 +105,13 @@ class Entity extends QueryBuild
         $queryBuild->select('*')
             ->from($tabela);
 
-        foreach ($where as $key => $value) {
-            $queryBuild->whereAnd($key, $value[0], $value[1]);
-            // $props[] = $key;
-            // $propsValue[] = ":{$key}";
+        foreach ($options as $key => $value) {
+            if ($key == 'where') {
+                foreach ($value as $item) {
+                    $queryBuild->whereAnd($item[0], $item[1], $item[2]);
+                }
+            }
         }
-
-        // $where = implode(' AND ', $where);
-        // $where = !empty($where) ? " WHERE {$where}" : "";
-        // $query = "SELECT * FROM {$tabela} {$where}";
         $resultado = $queryBuild->get();
 
         return $resultado;
