@@ -50,7 +50,8 @@ class App
             if ($item === $_SERVER['REQUEST_METHOD']) {
                 foreach ($value as $rota) {
                     if ($rota['rota'] == $_GET['path']) {
-                        $controller = new $rota['controller'];
+                        $resolver = new Resolver();
+                        $controller = $resolver->resolve($rota['controller']);
                         $controller->{$rota['method']}(
                             new Request()
                         );

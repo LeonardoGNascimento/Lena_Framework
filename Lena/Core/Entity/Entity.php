@@ -9,7 +9,7 @@ class Entity extends QueryBuild
 {
     public function save($values = [])
     {
-        $pdo = new PDO("mysql:host=localhost;dbname=usuario", "root", "");
+        $pdo = self::createPdo();
         $retorno = explode('\\', get_class($this));
         $tabela = end($retorno);
 
@@ -53,7 +53,7 @@ class Entity extends QueryBuild
 
     public static function create($values = [])
     {
-        $pdo = new PDO("mysql:host=localhost;dbname=usuario", "root", "");
+        $pdo = self::createPdo();
         $retorno = explode('\\', get_called_class());
         $tabela = end($retorno);
 
@@ -97,7 +97,7 @@ class Entity extends QueryBuild
 
     public static function all($options = [])
     {
-        $pdo = new PDO("mysql:host=localhost;dbname=usuario", "root", "");
+        $pdo = self::createPdo();
         $retorno = explode('\\', get_called_class());
         $tabela = end($retorno);
 
@@ -119,7 +119,7 @@ class Entity extends QueryBuild
 
     public static function startSelect(...$select)
     {
-        $pdo = new PDO("mysql:host=localhost;dbname=usuario", "root", "");
+        $pdo = self::createPdo();
         $retorno = explode('\\', get_called_class());
         $tabela = end($retorno);
 
@@ -129,5 +129,10 @@ class Entity extends QueryBuild
             ->from($tabela);
 
         return $queryBuild;
+    }
+
+    public static function createPdo()
+    {
+        return new PDO("mysql:host=localhost;dbname=usuario", "root", "");
     }
 }
