@@ -2,9 +2,9 @@
 
 namespace Lena\Lena\Core;
 
-abstract class Controller
+class Response
 {
-    function return_json($return)
+    public function json($return)
     {
         echo json_encode($return);
         die;

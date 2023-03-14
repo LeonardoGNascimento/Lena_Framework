@@ -4,62 +4,64 @@ namespace Lena\Lena\Core;
 
 class App
 {
-    public $GET = [];
-    public $POST = [];
-    public $PATCH = [];
-    public $PUT = [];
-    public $DELETE = [];
-    public $METHOD = [];
+    private $routes = [];
+    private $prefix = '';
 
-    public function GET($rota, $controller, $method)
+    public function get($route, $controller, $method)
     {
-        $this->GET[] = [
-            "rota" => $rota,
-            "controller" => $controller,
-            "method" => $method
-        ];
+        $this->addRoute('GET', $route, $controller, $method);
     }
 
-    public function POST($rota, $controller, $method)
+    public function post($route, $controller, $method)
     {
-        $this->POST[] = [
-            "rota" => $rota,
-            "controller" => $controller,
-            "method" => $method
-        ];
+        $this->addRoute('POST', $route, $controller, $method);
     }
 
-    public function PATCH($rota, $controller, $method)
+    public function patch($route, $controller, $method)
     {
-        $this->PATCH[] = [
-            "rota" => $rota,
-            "controller" => $controller,
-            "method" => $method
-        ];
+        $this->addRoute('PATCH', $route, $controller, $method);
     }
 
-    public function GROUP($prefix, $rotas)
+    public function group($prefix, $callback)
     {
-        // var_dump($this->GET);
-        var_dump($rotas);
+        $oldPrefix = $this->prefix;
+        $this->prefix .= $prefix;
+        $callback($this);
+        $this->prefix = $oldPrefix;
+    }
+
+    private function addRoute($method, $route, $controller, $action)
+    {
+        $this->routes[] = [
+            'method' => $method,
+            'route' => $this->prefix . $route,
+            'controller' => $controller,
+            'action' => $action
+        ];
     }
 
     public function run()
     {
-        foreach ($this as $item => $value) {
-            if ($item === $_SERVER['REQUEST_METHOD']) {
-                foreach ($value as $rota) {
-                    if ($rota['rota'] == $_GET['path']) {
-                        $resolver = new Resolver();
-                        $controller = $resolver->resolve($rota['controller']);
-                        $controller->{$rota['method']}(
-                            new Request()
-                        );
-                    }
-                }
-            }
+        $method = $_SERVER['REQUEST_METHOD'];
+        $path = $_GET['path'] ?? '';
+
+        $matchedRoutes = array_filter($this->routes, function ($route) use ($method, $path) {
+            return $route['method'] === $method && $route['route'] === $path;
+        });
+
+        if (empty($matchedRoutes)) {
+            http_response_code(404);
+            echo json_encode('Rota não encontrada');
+            return;
         }
-        http_response_code(404);
-        echo json_encode('Rota não encontrada');
+
+        $route = reset($matchedRoutes);
+
+        $resolver = new Resolver();
+        $controller = $resolver->resolve($route['controller']);
+        $controller->{$route['action']}(
+            new Request(),
+            new Response()
+        );
     }
 }

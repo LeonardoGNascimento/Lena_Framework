@@ -40,7 +40,7 @@ class Resolver
     private function tryGetArguments($className, array $params)
     {
         foreach ($params as $param) {
-            $args = $this->resolveParam($className, $param);
+            $args[] = $this->resolveParam($className, $param);
         }
 
         return $args;
