@@ -50,15 +50,12 @@ class App
         });
 
         if (empty($matchedRoutes)) {
-            http_response_code(404);
-            echo json_encode('Rota não encontrada');
-            return;
+            return (new Response())->json('Rota não encontrada', 404);
         }
 
         $route = reset($matchedRoutes);
 
-        $resolver = new Resolver();
-        $controller = $resolver->resolve($route['controller']);
+        $controller = (new Resolver())->resolve($route['controller']);
         $controller->{$route['action']}(
             new Request(),
             new Response()
