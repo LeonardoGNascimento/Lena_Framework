@@ -1,21 +1,22 @@
 {
-    "name": "lena/lena",
-    "type": "library",
-    "license": "GPL-3.0-or-later",
-    "authors": [
-        {
-            "name": "LeonardoGNascimento",
-            "email": "leonardogabrielllpedroso@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Lena\\Lena\\": "Lena/"
-        }
-    },
-    "minimum-stability": "beta",
-    "version": "1.0.0",
-    "require": {
-        "php": ">=8.2"
+  "name": "lena/lena",
+  "type": "library",
+  "description": "Framework Lena para desenvolvimento web",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "LeonardoGNascimento",
+      "email": "leonardogabrielllpedroso@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Lena\\Lena\\": "Lena/"
+    }
+  },
+  "require": {
+    "php": ">=8.2"
+  },
+  "minimum-stability": "beta",
+  "version": "1.0.0"
 }
