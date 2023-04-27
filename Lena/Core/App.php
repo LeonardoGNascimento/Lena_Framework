@@ -42,19 +42,16 @@ class App
 
     public function run()
     {
-        $method = $_SERVER['REQUEST_METHOD'];
-        $path = $_GET['path'] ?? '';
-
-        $matchedRoutes = array_filter($this->routes, function ($route) use ($method, $path) {
-            return $route['method'] === $method && $route['route'] === $path;
-        });
+        $matchedRoutes = array_filter(
+            $this->routes,
+            fn ($route) => $route['method'] === $_SERVER['REQUEST_METHOD'] && $route['route'] === $_GET['path'] ?? ''
+        );
 
         if (empty($matchedRoutes)) {
-            return (new Response())->json('Rota não encontrada', 404);
+            return (new Response())->json('Rota não encontrada', StatusCode::HTTP_NOT_FOUND->value);
         }
 
         $route = reset($matchedRoutes);
-
         $controller = (new Resolver())->resolve($route['controller']);
         $controller->{$route['action']}(
             new Request(),
