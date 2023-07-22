@@ -44,7 +44,7 @@ class App
     {
         $matchedRoutes = array_filter(
             $this->routes,
-            fn ($route) => $route['method'] === $_SERVER['REQUEST_METHOD'] && $route['route'] === $_GET['path'] ?? ''
+            fn ($route) => $route['method'] === $_SERVER['REQUEST_METHOD'] && $route['route'] === ($_GET['path'] ?? '')
         );
 
         if (empty($matchedRoutes)) {
