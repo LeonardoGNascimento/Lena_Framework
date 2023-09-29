@@ -15,8 +15,9 @@
     }
   },
   "require": {
-    "php": ">=8.2"
+    "php": ">=8.2",
+    "lena/resolver": "^1.0"
   },
-  "minimum-stability": "beta",
-  "version": "1.0.2"
+  "minimum-stability": "dev",
+  "version": "1.2.0"
 }

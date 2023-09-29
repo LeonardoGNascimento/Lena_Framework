@@ -1,0 +1,61 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "ac56712b9d19b6bae8569be38210ed0f",
+    "packages": [
+        {
+            "name": "lena/resolver",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LeonardoGNascimento/Lena_resolver.git",
+                "reference": "670c1b49c2d899e5c2eb03363e793b8667fb40e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LeonardoGNascimento/Lena_resolver/zipball/670c1b49c2d899e5c2eb03363e793b8667fb40e4",
+                "reference": "670c1b49c2d899e5c2eb03363e793b8667fb40e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lena\\Resolver\\": "Resolver/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "LeonardoGNascimento",
+                    "email": "leonardogabrielllpedroso@gmail.com"
+                }
+            ],
+            "description": "Biblioteca para resolver dependencias de classes",
+            "support": {
+                "issues": "https://github.com/LeonardoGNascimento/Lena_resolver/issues",
+                "source": "https://github.com/LeonardoGNascimento/Lena_resolver/tree/1.0.3"
+            },
+            "time": "2023-09-29T01:26:50+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=8.2"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}

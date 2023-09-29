@@ -2,6 +2,8 @@
 
 namespace Lena\Lena\Core;
 
+use Lena\Resolver\Resolver\Resolver;
+
 class App
 {
     private $routes = [];
